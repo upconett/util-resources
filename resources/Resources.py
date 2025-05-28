@@ -37,3 +37,5 @@ class Resources:
         with open(name_or_path, 'r', encoding='utf-8') as file:
             return file.read()
         
+    def path_to(self, name: str) -> str:
+        return os.path.join(self._path, name)
