@@ -1,10 +1,12 @@
 import os
-import shutil
 
 from resources import Resources
-
-
-TEST_DIR = "tests/test-resources/"
+from tests.utility import (
+    TEST_DIR,
+    remdir,
+    clear,
+    fill_dir
+)
 
 
 # region tests
@@ -60,30 +62,9 @@ def test_get_str():
     res = Resources(TEST_DIR)
     
     fill_dir()
-    assert res.get_str("config.yaml") == "token=123"
+    assert res.get_str("config.yaml") == "token: 123"
 
     clear()
-
-# endregion
-
-
-# region utility
-
-def clear():
-    remdir(TEST_DIR)
-
-
-def remdir(dir_path: str):
-    shutil.rmtree(dir_path, ignore_errors=True)
-
-
-def fill_dir():
-    if not os.path.exists(TEST_DIR):
-        os.mkdir(TEST_DIR)
-
-    os.mkdir(os.path.join(TEST_DIR, "images"))
-    with open(os.path.join(TEST_DIR, "config.yaml"), 'w') as cfg:
-        cfg.write("token=123")
 
 # endregion
 
