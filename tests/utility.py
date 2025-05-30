@@ -41,3 +41,15 @@ def fill_config_list():
             "- 5434fsda453\n"
             "- 345333da453\n"
         )
+
+    
+def fill_config_env():
+    if not os.path.exists(TEST_DIR):
+        os.mkdir(TEST_DIR)
+
+    with open(os.path.join(TEST_DIR, ".env"), 'w') as cfg:
+        cfg.write(
+            "token = '123'\n"
+            "limit = 5\n"
+            "threshold = 6.76"
+        )

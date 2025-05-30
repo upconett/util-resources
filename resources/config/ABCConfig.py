@@ -1,4 +1,5 @@
 import os
+from typing import Any
 from abc import ABC, abstractmethod
 
 from .exceptions import NoConfigFile, KeyUndefined
@@ -11,25 +12,25 @@ class ABCConfig(ABC):
         self._check_undefined_keys()
         self._populate_keys()
         
-    def _get_annotated(self) -> list[str]:
-        return self.__class__.__annotations__.keys()
+    def _get_annotations(self) -> dict[str, Any]:
+        return self.__class__.__annotations__
 
     def _undefined_keys(self, data: dict) -> list[str]:
         undefined_keys = []
-        annotated_keys = self._get_annotated()
+        annotated_keys = self._get_annotations().keys()
         for key in annotated_keys:
             if data.get(key) is None:
                 undefined_keys.append(key)
         return undefined_keys
 
     def _populate_keys(self):
-        annotated_keys = self.__class__.__annotations__.keys()
+        annotated_keys = self._get_annotations().keys()
         for key, value in self._get_data().items():
             if key in annotated_keys:
                 setattr(self, key, value)
 
     def _write_default(self):
-        annotated_keys = self._get_annotated()
+        annotated_keys = self._get_annotations().keys()
         data = self._get_data()
         values = [data.get(key) for key in annotated_keys]
         self._write_data(dict(zip(annotated_keys, values)))
