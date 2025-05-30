@@ -5,7 +5,8 @@ from resources import Resources
 from tests.utility import (
     TEST_DIR,
     clear,
-    fill_config
+    fill_config,
+    fill_config_list
 )
 
 
@@ -49,6 +50,24 @@ def test_keys():
 
     assert cfg.token == "543534543"
     assert cfg.name == "marko"
+
+    clear()
+
+
+def test_key_list():
+    res = Resources(TEST_DIR)
+
+    class Config(YAMLConfig):
+        token: str
+        admins: list[str]
+
+    fill_config_list()
+
+    cfg = Config(res.path_to("config.yaml"))
+
+    assert cfg.token == "543534543"
+    assert len(cfg.admins) == 2
+    assert cfg.admins == ["5434fsda453","345333da453"]
 
     clear()
     

@@ -28,3 +28,16 @@ def fill_config():
             "token: '543534543'\n"
             "name: 'marko'\n"
         )
+
+
+def fill_config_list():
+    if not os.path.exists(TEST_DIR):
+        os.mkdir(TEST_DIR)
+
+    with open(os.path.join(TEST_DIR, "config.yaml"), 'w') as cfg:
+        cfg.write(
+            "token: '543534543'\n"
+            "admins:\n"
+            "- 5434fsda453\n"
+            "- 345333da453\n"
+        )
