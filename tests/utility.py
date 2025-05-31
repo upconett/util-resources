@@ -19,7 +19,7 @@ def fill_dir():
     with open(os.path.join(TEST_DIR, "config.yaml"), 'w') as cfg:
         cfg.write("token: 123")
 
-def fill_config():
+def fill_config_yaml():
     if not os.path.exists(TEST_DIR):
         os.mkdir(TEST_DIR)
 
@@ -29,8 +29,20 @@ def fill_config():
             "name: 'marko'\n"
         )
 
+def fill_config_json():
+    if not os.path.exists(TEST_DIR):
+        os.mkdir(TEST_DIR)
 
-def fill_config_list():
+    with open(os.path.join(TEST_DIR, "config.json"), 'w') as cfg:
+        cfg.write(
+            '{\n'
+            '"token": "543534543",\n'
+            '"name": "marko"'
+            '}\n'
+        )
+
+
+def fill_config_list_yaml():
     if not os.path.exists(TEST_DIR):
         os.mkdir(TEST_DIR)
 
@@ -40,6 +52,22 @@ def fill_config_list():
             "admins:\n"
             "- 5434fsda453\n"
             "- 345333da453\n"
+        )
+
+
+def fill_config_list_json():
+    if not os.path.exists(TEST_DIR):
+        os.mkdir(TEST_DIR)
+
+    with open(os.path.join(TEST_DIR, "config.json"), 'w') as cfg:
+        cfg.write(
+            '{\n'
+            '"token": "543534543",\n'
+            '"admins": [\n'
+            '  "5434fsda453",\n'
+            '  "345333da453"\n'
+            '  ]\n'
+            '}\n'
         )
 
     
